@@ -4,7 +4,21 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Lunch Jackpot</title>
-<link rel="stylesheet" href="style.css" />
+<style>
+:root{--ink:#21150e;--muted:rgba(33,21,14,.66);--line:rgba(33,21,14,.1);--card:rgba(255,255,255,.86);--green:#16783d}
+*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden}
+body{color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 15%,#fff0b8,transparent 32%),radial-gradient(circle at 85% 18%,#ffd7e8,transparent 34%),radial-gradient(circle at 50% 94%,#dff0ff,transparent 36%),#fff7ed}
+.app{height:100svh;display:grid;place-items:center;padding:10px}
+.card{width:min(430px,97vw);height:min(820px,100%);padding:14px;border-radius:30px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(18px);box-shadow:0 18px 48px rgba(43,27,14,.18);display:grid;grid-template-rows:auto auto auto auto auto 1fr;gap:10px}
+header{text-align:center;position:relative;padding-top:2px}.sound{position:absolute;right:0;top:0;width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:17px}.eyebrow{margin:0 0 3px;color:var(--muted);font-size:10px;font-weight:950;letter-spacing:.8px;text-transform:uppercase}h1{margin:0;font-size:clamp(34px,10vw,48px);line-height:.88;letter-spacing:-2px}.tagline{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.2}
+.machine{margin-top:12px;border-radius:24px;padding:12px 10px 11px;background:linear-gradient(180deg,#2b323b,#10151b);border:1px solid rgba(33,21,14,.16);box-shadow:inset 0 0 0 4px rgba(255,255,255,.12),0 12px 24px rgba(33,21,14,.14)}
+.machineTitle{width:max-content;max-width:92%;margin:0 auto 10px;padding:7px 14px;border-radius:14px;background:#202833;color:white;font-size:12px;font-weight:950;box-shadow:0 8px 16px rgba(0,0,0,.18);white-space:nowrap}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.reel{min-width:0;height:122px;border-radius:17px;padding:10px 6px;display:grid;grid-template-rows:auto 1fr auto;place-items:center;overflow:hidden;background:linear-gradient(180deg,#fff9ef,#f4dfc7);box-shadow:inset 0 3px 12px rgba(33,21,14,.18)}.reel span{color:var(--green);font-size:9px;font-weight:950;letter-spacing:.7px;text-transform:uppercase}.reel strong{font-size:30px;line-height:1}.reel em{max-width:100%;font-style:normal;text-align:center;font-size:11px;font-weight:950;line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.reel.spinning strong{animation:bounce .18s linear infinite}@keyframes bounce{50%{transform:translateY(-5px) scale(1.08)}}
+button{font-family:inherit;font-weight:950;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.spin{width:100%;border:0;border-radius:20px;padding:14px;font-size:17px;color:white;background:linear-gradient(180deg,#ff7238,#e63412);box-shadow:0 10px 0 #a9260f,0 18px 28px rgba(230,52,18,.2)}
+.result{border:1px solid var(--line);border-radius:23px;padding:12px;background:rgba(255,255,255,.62);min-height:0}.resultHead{display:flex;align-items:center;justify-content:space-between;gap:8px}.resultHead p{margin:0;color:var(--green);font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.7px}.copy{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:#fff}h2{margin:2px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spacing:-1.1px}.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.chips span{max-width:100%;padding:7px 9px;border-radius:10px;background:#e7f5d7;color:#124e28;font-size:11px;font-weight:900}.chips span:nth-child(2){background:#ffe6a6;color:#7b3d00}.chips span:nth-child(3){background:#f0d7f5;color:#6b2674}#fortune{margin:0;padding:9px;border:1px dashed #77bd7a;border-radius:14px;color:var(--muted);font-size:12px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px}.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px;font-size:12px}.tab.active{background:#21150e;color:white}.panel{display:none;min-height:0;overflow:hidden}.panel.active{display:block}.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.stats div{min-width:0;padding:8px;border-radius:14px;background:rgba(255,255,255,.58);border:1px solid var(--line)}.stats span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:950}.stats strong{display:block;margin-top:3px;font-size:12px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#historyList{margin:0;padding-left:22px;max-height:80px;overflow:auto;font-size:12px;font-weight:800}#historyList li{margin-bottom:5px}.confetti{position:fixed;width:9px;height:13px;top:-20px;pointer-events:none;animation:fall 1.8s linear forwards;z-index:999}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.8}}
+@media(max-height:700px){.card{gap:7px;padding:11px}.tagline{display:none}h1{font-size:35px}.machine{margin-top:6px;padding-top:10px}.reel{height:102px}.reel strong{font-size:25px}.spin{padding:12px;font-size:16px}#fortune{display:none}}
+</style>
 </head>
 <body>
 <main class="app">
@@ -15,7 +29,6 @@
 <h1>Lunch Jackpot</h1>
 <p class="tagline">Can’t decide what to eat? Let luck decide.</p>
 </header>
-
 <section class="machine">
 <div class="machineTitle">⭐ Today’s Lunch ⭐</div>
 <div class="reels">
@@ -24,9 +37,7 @@
 <div class="reel"><span>Challenge</span><strong id="chalEmoji">🎯</strong><em id="chalText">Spin</em></div>
 </div>
 </section>
-
 <button id="spinBtn" class="spin" type="button">🎰 Spin Jackpot</button>
-
 <section class="result">
 <div class="resultHead"><p>Your Lunch Jackpot</p><button id="copyBtn" class="copy" type="button">📋</button></div>
 <h2 id="food">Ready to spin?</h2>
@@ -37,12 +48,10 @@
 </div>
 <p id="fortune">Your lunch fate is currently marinating.</p>
 </section>
-
 <section class="tabs">
 <button class="tab active" data-tab="stats" type="button">📊 Stats</button>
 <button class="tab" data-tab="history" type="button">🕘 History</button>
 </section>
-
 <section id="statsPanel" class="panel active">
 <div class="stats">
 <div><span>Total</span><strong id="totalSpins">0</strong></div>
@@ -50,10 +59,205 @@
 <div><span>Top Dish</span><strong id="topDish">-</strong></div>
 </div>
 </section>
-
 <section id="historyPanel" class="panel"><ol id="historyList"></ol></section>
 </section>
 </main>
-<script src="app.js"></script>
+<script>
+const data = {"categories": [{"name": "Malaysian Rice", "emoji": "🍛", "budget": "RM10–25", "foods": ["Nasi Ayam", "Nasi Lemak", "Nasi Kandar", "Nasi Campur", "Ayam Gepuk", "Ayam Penyet", "Briyani", "Banana Leaf Rice", "Claypot Chicken Rice", "Hainanese Chicken Rice", "Roast Duck Rice", "Fried Rice", "Nasi Padang", "Kam Heong Rice"]}, {"name": "Malaysian Noodles", "emoji": "🍜", "budget": "RM9–20", "foods": ["Pan Mee", "Curry Mee", "Sarawak Laksa", "Asam Laksa", "Mee Goreng", "Hokkien Mee", "Wantan Mee", "Kolo Mee", "Prawn Mee", "Mee Soto", "Mee Rebus", "Char Kuey Teow", "Dry Chili Pan Mee", "Ipoh Hor Fun"]}, {"name": "Hawker Favourites", "emoji": "🥟", "budget": "RM8–22", "foods": ["Dim Sum", "Yong Tau Foo", "Lok Lok", "Satay", "Chee Cheong Fun", "Curry Chee Cheong Fun", "Roti Canai", "Roti Telur", "Murtabak", "Pasembur", "Rojak", "Oyster Omelette", "Otak-Otak"]}, {"name": "Burgers & Sandwiches", "emoji": "🍔", "budget": "RM12–30", "foods": ["Burger", "Chicken Burger", "Beef Burger", "Sandwich", "Club Sandwich", "Chicken Wrap", "Hot Dog", "Subway-style Sandwich", "Grilled Cheese"]}, {"name": "Western", "emoji": "🍕", "budget": "RM18–45", "foods": ["Pizza", "Pasta", "Steak", "Fish & Chips", "Mac & Cheese", "Chicken Chop", "Lamb Chop", "Mushroom Soup & Garlic Bread", "Mixed Grill"]}, {"name": "Japanese", "emoji": "🍣", "budget": "RM18–50", "foods": ["Sushi", "Ramen", "Bento", "Donburi", "Japanese Curry Rice", "Udon", "Soba", "Gyoza", "Onigiri", "Katsu Don"]}, {"name": "Korean", "emoji": "🇰🇷", "budget": "RM18–45", "foods": ["Korean Fried Chicken", "Bibimbap", "Bulgogi", "Kimchi Stew", "Tteokbokki", "Kimbap", "Japchae", "Ramyeon"]}, {"name": "Mexican & Middle Eastern", "emoji": "🌮", "budget": "RM15–35", "foods": ["Tacos", "Burrito", "Shawarma", "Kebab", "Falafel Wrap", "Quesadilla", "Chicken Rice Bowl", "Hummus Plate"]}, {"name": "Healthy Choices", "emoji": "🥗", "budget": "RM15–35", "foods": ["Caesar Salad", "Chicken Salad", "Grain Bowl", "Poke Bowl", "Chicken Wrap", "Vegetarian Rice", "Soup & Bread", "Baked Potato", "Fruit Bowl"]}, {"name": "Café Lunch", "emoji": "☕", "budget": "RM15–40", "foods": ["Big Breakfast", "Toast Set", "Croissant Sandwich", "Soup & Bread", "Quiche", "Chicken Pie", "Pesto Pasta", "Egg Mayo Sandwich"]}, {"name": "Food Court Classics", "emoji": "🍱", "budget": "RM8–20", "foods": ["Economy Rice", "Mixed Rice", "Mixed Grill", "Honey Chicken Rice", "Sweet & Sour Fish Rice", "Sambal Squid Rice", "Butter Chicken Rice", "Salted Egg Chicken Rice"]}, {"name": "Fast Food", "emoji": "⚡", "budget": "RM12–30", "foods": ["Fried Chicken", "Burger Set", "Nuggets", "Wrap", "Fries Combo", "Chicken Tenders", "Fish Burger", "Spicy Chicken Burger"]}, {"name": "Chaos", "emoji": "🎲", "budget": "Fate decides", "foods": ["Your colleague decides", "First food you see on Grab", "Under RM15 Challenge", "Walk somewhere new", "Make it extra spicy", "Healthy only", "Spin again and accept", "Ask ChatGPT"]}, {"name": "Lucky", "emoji": "🌟", "budget": "Worth it", "foods": ["Golden Fork: Eat Anything", "Dessert Before Lunch", "Upgrade to Combo", "You Choose Everyone's Lunch", "Lucky Wallet", "Double Spin", "Buy Someone a Drink"]}, {"name": "Legendary", "emoji": "☠️", "budget": "RM0–??", "foods": ["Fast Today", "Leftovers Only", "No Phone During Lunch"]}, {"name": "Chef's Surprise", "emoji": "❓", "budget": "Mystery", "foods": []}], "challenges": ["Bring a colleague", "Try a drink you never order", "Rate lunch out of 10", "Take a food photo", "Sit with someone new", "No complaining for 30 minutes", "Recommend this food", "Find the cheapest version nearby"], "fortunes": ["May your queue be short and your portion generous.", "Good food, good mood, fewer 3pm snacks.", "A great conversation may be hiding behind this lunch.", "Today’s meal has main character energy.", "This is edible decision-making.", "The lunch machine has spoken."]};
+
+const $ = id => document.getElementById(id);
+const els = {
+  sound:$("soundBtn"), spin:$("spinBtn"), copy:$("copyBtn"),
+  catE:$("catEmoji"), dishE:$("dishEmoji"), chalE:$("chalEmoji"),
+  catT:$("catText"), dishT:$("dishText"), chalT:$("chalText"),
+  food:$("food"), catChip:$("categoryChip"), budget:$("budgetChip"),
+  challenge:$("challengeChip"), fortune:$("fortune"),
+  total:$("totalSpins"), topCat:$("topCategory"), topDish:$("topDish"), hist:$("historyList")
+};
+
+let current = null;
+let soundOn = true;
+let history = [];
+let stats = {"total":0,"categories":{},"foods":{}};
+
+try {
+  soundOn = JSON.parse(localStorage.getItem("ljSound") || "true");
+  history = JSON.parse(localStorage.getItem("ljHistory") || "[]");
+  stats = JSON.parse(localStorage.getItem("ljStats") || '{"total":0,"categories":{},"foods":{}}');
+} catch (e) {
+  soundOn = true;
+  history = [];
+  stats = {"total":0,"categories":{},"foods":{}};
+}
+
+const random = arr => arr[Math.floor(Math.random() * arr.length)];
+
+function normalFoods() {
+  return data.categories
+    .filter(c => !["Chaos","Lucky","Legendary","Chef's Surprise"].includes(c.name))
+    .flatMap(c => c.foods);
+}
+
+function setSound() {
+  els.sound.textContent = soundOn ? "🔊" : "🔇";
+}
+
+function beep(freq=440, duration=.05, type="sine") {
+  if (!soundOn) return;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  const ctx = new AudioContext();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+  osc.frequency.value = freq;
+  osc.type = type;
+  gain.gain.setValueAtTime(.045, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001, ctx.currentTime + duration);
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+  osc.start();
+  osc.stop(ctx.currentTime + duration);
+}
+
+function confetti(count=70) {
+  const colors = ["#FFD166","#EF476F","#06D6A0","#118AB2","#C77DFF","#FF5A1F"];
+  for (let i = 0; i < count; i++) {
+    const piece = document.createElement("div");
+    piece.className = "confetti";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.background = random(colors);
+    piece.style.animationDelay = Math.random() * .35 + "s";
+    piece.style.transform = "rotate(" + (Math.random()*360) + "deg)";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 2300);
+  }
+}
+
+function top(obj) {
+  const entries = Object.entries(obj || {});
+  return entries.length ? entries.sort((a,b) => b[1] - a[1])[0][0] : "-";
+}
+
+function save() {
+  try {
+    localStorage.setItem("ljHistory", JSON.stringify(history.slice(0,10)));
+    localStorage.setItem("ljStats", JSON.stringify(stats));
+  } catch (e) {}
+}
+
+function updatePanels() {
+  els.total.textContent = stats.total || 0;
+  els.topCat.textContent = top(stats.categories);
+  els.topDish.textContent = top(stats.foods);
+  els.hist.innerHTML = history.length
+    ? history.map(x => "<li>" + x.food + " <small>(" + x.category + ")</small></li>").join("")
+    : "<li>No spins yet.</li>";
+}
+
+function choose() {
+  const category = random(data.categories);
+  const dish = category.name === "Chef's Surprise" ? random(normalFoods()) : random(category.foods);
+  return {
+    category,
+    dish,
+    challenge: random(data.challenges),
+    fortune: random(data.fortunes)
+  };
+}
+
+function shuffleText() {
+  const c = random(data.categories);
+  els.catE.textContent = c.emoji;
+  els.catT.textContent = c.name;
+  els.dishE.textContent = random(["🍛","🍜","🥟","🍔","🍕","🍣","🥗","🍱","⚡","🌮"]);
+  els.dishT.textContent = random(normalFoods());
+  els.chalE.textContent = random(["🎯","👥","🌶️","💰","📸","⭐","🎲"]);
+  els.chalT.textContent = random(data.challenges);
+}
+
+function record(result) {
+  stats.total = (stats.total || 0) + 1;
+  stats.categories[result.category.name] = (stats.categories[result.category.name] || 0) + 1;
+  stats.foods[result.dish] = (stats.foods[result.dish] || 0) + 1;
+  history.unshift({food: result.dish, category: result.category.name, time: new Date().toISOString()});
+  history = history.slice(0,10);
+  save();
+  updatePanels();
+}
+
+function reveal(result) {
+  current = result;
+  els.catE.textContent = result.category.emoji;
+  els.catT.textContent = result.category.name;
+  els.dishE.textContent = result.category.emoji;
+  els.dishT.textContent = result.dish;
+  els.chalE.textContent = "🎯";
+  els.chalT.textContent = result.challenge;
+  els.food.textContent = result.dish;
+  els.catChip.textContent = result.category.emoji + " " + result.category.name;
+  els.budget.textContent = "💰 " + result.category.budget;
+  els.challenge.textContent = "🎯 " + result.challenge;
+  els.fortune.textContent = result.fortune;
+  record(result);
+  beep(660,.08,"triangle");
+  setTimeout(() => beep(880,.1,"triangle"), 90);
+  if (["Lucky","Legendary","Chef's Surprise"].includes(result.category.name)) confetti(90);
+}
+
+function spin() {
+  els.spin.disabled = true;
+  document.querySelectorAll(".reel").forEach(r => r.classList.add("spinning"));
+  els.food.textContent = "Spinning...";
+  els.fortune.textContent = "The lunch machine is shuffling destiny.";
+  const result = choose();
+  let ticks = 0;
+  const timer = setInterval(() => {
+    shuffleText();
+    beep(260 + ticks * 16, .025, "square");
+    ticks++;
+    if (ticks > 24) {
+      clearInterval(timer);
+      document.querySelectorAll(".reel").forEach(r => r.classList.remove("spinning"));
+      reveal(result);
+      els.spin.disabled = false;
+    }
+  }, 95);
+}
+
+async function copyResult() {
+  const text = current
+    ? "🎰 Lunch Jackpot: " + current.dish + " (" + current.category.name + ") • " + current.category.budget + " • " + current.challenge
+    : "🎰 Lunch Jackpot: Not spun yet";
+  try {
+    await navigator.clipboard.writeText(text);
+    els.copy.textContent = "✅";
+    setTimeout(() => els.copy.textContent = "📋", 1000);
+  } catch (e) {
+    alert(text);
+  }
+}
+
+function init() {
+  setSound();
+  updatePanels();
+  els.spin.onclick = spin;
+  els.copy.onclick = copyResult;
+  els.sound.onclick = () => {
+    soundOn = !soundOn;
+    try { localStorage.setItem("ljSound", JSON.stringify(soundOn)); } catch(e) {}
+    setSound();
+  };
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.onclick = () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+      tab.classList.add("active");
+      $(tab.dataset.tab + "Panel").classList.add("active");
+    };
+  });
+}
+
+init();
+</script>
 </body>
 </html>
