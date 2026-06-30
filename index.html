@@ -1,48 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lunch Jackpot</title>
 <style>
-:root{--ink:#21150e;--muted:rgba(33,21,14,.66);--line:rgba(33,21,14,.1);--card:rgba(255,255,255,.88);--green:#16783d}
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;overflow:hidden}
-body{color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 15%,#fff0b8,transparent 32%),radial-gradient(circle at 85% 18%,#ffd7e8,transparent 34%),radial-gradient(circle at 50% 94%,#dff0ff,transparent 36%),#fff7ed}
+html,body{margin:0;height:100%;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#fff7ed;color:#21150e;overflow:hidden}
+body{background:radial-gradient(circle at 15% 15%,#fff0b8,transparent 32%),radial-gradient(circle at 85% 18%,#ffd7e8,transparent 34%),#fff7ed}
 .app{height:100svh;display:grid;place-items:center;padding:10px}
-.card{width:min(430px,97vw);height:min(820px,100%);padding:14px;border-radius:30px;border:1px solid var(--line);background:var(--card);box-shadow:0 18px 48px rgba(43,27,14,.18);display:grid;grid-template-rows:auto auto auto auto auto 1fr;gap:10px}
-header{text-align:center}.eyebrow{margin:0 0 3px;color:var(--muted);font-size:10px;font-weight:950;letter-spacing:.8px;text-transform:uppercase}
-h1{margin:0;font-size:clamp(34px,10vw,48px);line-height:.88;letter-spacing:-2px}
-.tagline{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.2}
-.machine{margin-top:10px;border-radius:24px;padding:12px 10px 11px;background:linear-gradient(180deg,#2b323b,#10151b);box-shadow:inset 0 0 0 4px rgba(255,255,255,.12),0 12px 24px rgba(33,21,14,.14)}
-.machineTitle{width:max-content;max-width:92%;margin:0 auto 10px;padding:7px 14px;border-radius:14px;background:#202833;color:white;font-size:12px;font-weight:950;white-space:nowrap}
+.card{width:min(430px,97vw);height:min(800px,100%);background:rgba(255,255,255,.9);border:1px solid rgba(33,21,14,.1);border-radius:28px;padding:14px;display:grid;grid-template-rows:auto auto auto auto auto 1fr;gap:10px;box-shadow:0 18px 48px rgba(43,27,14,.18)}
+header{text-align:center}
+.eyebrow{margin:0 0 4px;font-size:10px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;color:rgba(33,21,14,.65)}
+h1{margin:0;font-size:clamp(34px,10vw,48px);line-height:.9;letter-spacing:-2px}
+.tagline{margin:8px 0 0;font-size:12px;color:rgba(33,21,14,.65)}
+.machine{background:linear-gradient(180deg,#2b323b,#10151b);border-radius:24px;padding:12px 10px 11px;box-shadow:inset 0 0 0 4px rgba(255,255,255,.12)}
+.machineTitle{width:max-content;max-width:92%;margin:0 auto 10px;padding:7px 14px;border-radius:14px;background:#202833;color:white;font-size:12px;font-weight:900}
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.reel{min-width:0;height:122px;border-radius:17px;padding:10px 6px;display:grid;grid-template-rows:auto 1fr auto;place-items:center;overflow:hidden;background:linear-gradient(180deg,#fff9ef,#f4dfc7);box-shadow:inset 0 3px 12px rgba(33,21,14,.18)}
-.reel span{color:var(--green);font-size:9px;font-weight:950;letter-spacing:.7px;text-transform:uppercase}
-.reel strong{font-size:30px;line-height:1}
-.reel em{max-width:100%;font-style:normal;text-align:center;font-size:11px;font-weight:950;line-height:1.05;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.reel.spinning strong{animation:bounce .18s linear infinite}
+.reel{height:120px;border-radius:17px;background:linear-gradient(180deg,#fff9ef,#f4dfc7);display:grid;grid-template-rows:auto 1fr auto;place-items:center;padding:10px 6px;box-shadow:inset 0 3px 12px rgba(33,21,14,.18);overflow:hidden}
+.reel span{font-size:9px;font-weight:900;text-transform:uppercase;color:#16783d;letter-spacing:.7px}
+.reel strong{font-size:30px}
+.reel em{font-style:normal;text-align:center;font-size:11px;font-weight:900;line-height:1.05;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.spinning strong{animation:bounce .16s linear infinite}
 @keyframes bounce{50%{transform:translateY(-5px) scale(1.08)}}
-button{font-family:inherit;font-weight:950;cursor:pointer}
-button:disabled{opacity:.55;cursor:wait}
-.spin{width:100%;border:0;border-radius:20px;padding:14px;font-size:17px;color:white;background:linear-gradient(180deg,#ff7238,#e63412);box-shadow:0 10px 0 #a9260f,0 18px 28px rgba(230,52,18,.2)}
-.result{border:1px solid var(--line);border-radius:23px;padding:12px;background:rgba(255,255,255,.62);min-height:0}
-.resultHead{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.resultHead p{margin:0;color:var(--green);font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.7px}
-.copy{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:#fff}
-h2{margin:2px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spacing:-1.1px}
+button{font-family:inherit;font-weight:900;cursor:pointer}
+.spin{width:100%;border:0;border-radius:20px;padding:14px;font-size:17px;color:white;background:linear-gradient(180deg,#ff7238,#e63412);box-shadow:0 10px 0 #a9260f}
+.result{border:1px solid rgba(33,21,14,.1);border-radius:23px;padding:12px;background:rgba(255,255,255,.62)}
+.resultHead{display:flex;align-items:center;justify-content:space-between}
+.resultHead p{margin:0;color:#16783d;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.7px}
+.copy{width:34px;height:34px;border-radius:999px;border:1px solid rgba(33,21,14,.1);background:white}
+h2{margin:4px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spacing:-1px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.chips span{max-width:100%;padding:7px 9px;border-radius:10px;background:#e7f5d7;color:#124e28;font-size:11px;font-weight:900}
-.chips span:nth-child(2){background:#ffe6a6;color:#7b3d00}.chips span:nth-child(3){background:#f0d7f5;color:#6b2674}
-#fortune{margin:0;padding:9px;border:1px dashed #77bd7a;border-radius:14px;color:var(--muted);font-size:12px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px}.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px;font-size:12px}.tab.active{background:#21150e;color:white}
-.panel{display:none;min-height:0;overflow:hidden}.panel.active{display:block}
-.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.stats div{min-width:0;padding:8px;border-radius:14px;background:rgba(255,255,255,.58);border:1px solid var(--line)}.stats span{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.7px;font-weight:950}.stats strong{display:block;margin-top:3px;font-size:12px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chips span{padding:7px 9px;border-radius:10px;background:#e7f5d7;color:#124e28;font-size:11px;font-weight:800}
+.chips span:nth-child(2){background:#ffe6a6;color:#7b3d00}
+.chips span:nth-child(3){background:#f0d7f5;color:#6b2674}
+#fortune{margin:0;padding:9px;border:1px dashed #77bd7a;border-radius:14px;color:rgba(33,21,14,.65);font-size:12px;line-height:1.25}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.tab{border:1px solid rgba(33,21,14,.1);background:white;border-radius:999px;padding:9px;font-size:12px}
+.tab.active{background:#21150e;color:white}
+.panel{display:none;overflow:hidden}
+.panel.active{display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.stats div{padding:8px;border-radius:14px;background:rgba(255,255,255,.6);border:1px solid rgba(33,21,14,.1);min-width:0}
+.stats span{display:block;font-size:9px;font-weight:900;text-transform:uppercase;color:rgba(33,21,14,.65)}
+.stats strong{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #historyList{margin:0;padding-left:22px;max-height:80px;overflow:auto;font-size:12px;font-weight:800}
-#historyList li{margin-bottom:5px}
-.confetti{position:fixed;width:9px;height:13px;top:-20px;pointer-events:none;animation:fall 1.8s linear forwards;z-index:999}
+.confetti{position:fixed;top:-20px;width:9px;height:13px;animation:fall 1.8s linear forwards;z-index:99}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.8}}
-@media(max-height:700px){.card{gap:7px;padding:11px}.tagline{display:none}h1{font-size:35px}.machine{margin-top:6px;padding-top:10px}.reel{height:102px}.reel strong{font-size:25px}.spin{padding:12px;font-size:16px}#fortune{display:none}}
+@media(max-height:700px){.tagline{display:none}.reel{height:100px}#fortune{display:none}.card{gap:7px;padding:11px}h1{font-size:35px}}
 </style>
 </head>
 <body>
@@ -56,9 +61,9 @@ h2{margin:2px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spac
 <section class="machine">
 <div class="machineTitle">⭐ Today’s Lunch ⭐</div>
 <div class="reels">
-<div class="reel"><span>Category</span><strong id="catEmoji">🍜</strong><em id="catText">Ready</em></div>
-<div class="reel"><span>Dish</span><strong id="dishEmoji">🍽️</strong><em id="dishText">Set</em></div>
-<div class="reel"><span>Challenge</span><strong id="chalEmoji">🎯</strong><em id="chalText">Spin</em></div>
+<div class="reel" id="reel1"><span>Category</span><strong id="catEmoji">🍜</strong><em id="catText">Ready</em></div>
+<div class="reel" id="reel2"><span>Dish</span><strong id="dishEmoji">🍽️</strong><em id="dishText">Set</em></div>
+<div class="reel" id="reel3"><span>Challenge</span><strong id="chalEmoji">🎯</strong><em id="chalText">Spin</em></div>
 </div>
 </section>
 <button id="spinBtn" class="spin" type="button">🎰 Spin Jackpot</button>
@@ -73,8 +78,8 @@ h2{margin:2px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spac
 <p id="fortune">Your lunch fate is currently marinating.</p>
 </section>
 <section class="tabs">
-<button class="tab active" data-tab="stats" type="button">📊 Stats</button>
-<button class="tab" data-tab="history" type="button">🕘 History</button>
+<button id="statsTab" class="tab active" type="button">📊 Stats</button>
+<button id="historyTab" class="tab" type="button">🕘 History</button>
 </section>
 <section id="statsPanel" class="panel active">
 <div class="stats">
@@ -83,196 +88,154 @@ h2{margin:2px 0 8px;font-size:clamp(27px,7.4vw,38px);line-height:.98;letter-spac
 <div><span>Top Dish</span><strong id="topDish">-</strong></div>
 </div>
 </section>
-<section id="historyPanel" class="panel"><ol id="historyList"></ol></section>
+<section id="historyPanel" class="panel"><ol id="historyList"><li>No spins yet.</li></ol></section>
 </section>
 </main>
 <script>
-const DATA = {"categories": [{"name": "Malaysian Rice", "emoji": "🍛", "budget": "RM10–25", "foods": ["Nasi Ayam", "Nasi Lemak", "Nasi Kandar", "Nasi Campur", "Ayam Gepuk", "Ayam Penyet", "Briyani", "Banana Leaf Rice", "Claypot Chicken Rice", "Hainanese Chicken Rice", "Roast Duck Rice", "Fried Rice", "Nasi Padang", "Kam Heong Rice"]}, {"name": "Malaysian Noodles", "emoji": "🍜", "budget": "RM9–20", "foods": ["Pan Mee", "Curry Mee", "Sarawak Laksa", "Asam Laksa", "Mee Goreng", "Hokkien Mee", "Wantan Mee", "Kolo Mee", "Prawn Mee", "Mee Soto", "Mee Rebus", "Char Kuey Teow", "Dry Chili Pan Mee", "Ipoh Hor Fun"]}, {"name": "Hawker Favourites", "emoji": "🥟", "budget": "RM8–22", "foods": ["Dim Sum", "Yong Tau Foo", "Lok Lok", "Satay", "Chee Cheong Fun", "Curry Chee Cheong Fun", "Roti Canai", "Roti Telur", "Murtabak", "Pasembur", "Rojak", "Oyster Omelette", "Otak-Otak"]}, {"name": "Burgers & Sandwiches", "emoji": "🍔", "budget": "RM12–30", "foods": ["Burger", "Chicken Burger", "Beef Burger", "Sandwich", "Club Sandwich", "Chicken Wrap", "Hot Dog", "Subway-style Sandwich", "Grilled Cheese"]}, {"name": "Western", "emoji": "🍕", "budget": "RM18–45", "foods": ["Pizza", "Pasta", "Steak", "Fish & Chips", "Mac & Cheese", "Chicken Chop", "Lamb Chop", "Mushroom Soup & Garlic Bread", "Mixed Grill"]}, {"name": "Japanese", "emoji": "🍣", "budget": "RM18–50", "foods": ["Sushi", "Ramen", "Bento", "Donburi", "Japanese Curry Rice", "Udon", "Soba", "Gyoza", "Onigiri", "Katsu Don"]}, {"name": "Korean", "emoji": "🇰🇷", "budget": "RM18–45", "foods": ["Korean Fried Chicken", "Bibimbap", "Bulgogi", "Kimchi Stew", "Tteokbokki", "Kimbap", "Japchae", "Ramyeon"]}, {"name": "Mexican & Middle Eastern", "emoji": "🌮", "budget": "RM15–35", "foods": ["Tacos", "Burrito", "Shawarma", "Kebab", "Falafel Wrap", "Quesadilla", "Chicken Rice Bowl", "Hummus Plate"]}, {"name": "Healthy Choices", "emoji": "🥗", "budget": "RM15–35", "foods": ["Caesar Salad", "Chicken Salad", "Grain Bowl", "Poke Bowl", "Chicken Wrap", "Vegetarian Rice", "Soup & Bread", "Baked Potato", "Fruit Bowl"]}, {"name": "Café Lunch", "emoji": "☕", "budget": "RM15–40", "foods": ["Big Breakfast", "Toast Set", "Croissant Sandwich", "Soup & Bread", "Quiche", "Chicken Pie", "Pesto Pasta", "Egg Mayo Sandwich"]}, {"name": "Food Court Classics", "emoji": "🍱", "budget": "RM8–20", "foods": ["Economy Rice", "Mixed Rice", "Mixed Grill", "Honey Chicken Rice", "Sweet & Sour Fish Rice", "Sambal Squid Rice", "Butter Chicken Rice", "Salted Egg Chicken Rice"]}, {"name": "Fast Food", "emoji": "⚡", "budget": "RM12–30", "foods": ["Fried Chicken", "Burger Set", "Nuggets", "Wrap", "Fries Combo", "Chicken Tenders", "Fish Burger", "Spicy Chicken Burger"]}, {"name": "Chaos", "emoji": "🎲", "budget": "Fate decides", "foods": ["Your colleague decides", "First food you see on Grab", "Under RM15 Challenge", "Walk somewhere new", "Make it extra spicy", "Healthy only", "Spin again and accept", "Ask ChatGPT"]}, {"name": "Lucky", "emoji": "🌟", "budget": "Worth it", "foods": ["Golden Fork: Eat Anything", "Dessert Before Lunch", "Upgrade to Combo", "You Choose Everyone's Lunch", "Lucky Wallet", "Double Spin", "Buy Someone a Drink"]}, {"name": "Legendary", "emoji": "☠️", "budget": "RM0–??", "foods": ["Fast Today", "Leftovers Only", "No Phone During Lunch"]}, {"name": "Chef's Surprise", "emoji": "❓", "budget": "Mystery", "foods": []}], "challenges": ["Bring a colleague", "Try a drink you never order", "Rate lunch out of 10", "Take a food photo", "Sit with someone new", "No complaining for 30 minutes", "Recommend this food", "Find the cheapest version nearby"], "fortunes": ["May your queue be short and your portion generous.", "Good food, good mood, fewer 3pm snacks.", "A great conversation may be hiding behind this lunch.", "Today’s meal has main character energy.", "This is edible decision-making.", "The lunch machine has spoken."]};
+var categories = [{"name": "Malaysian Rice", "emoji": "🍛", "budget": "RM10–25", "foods": ["Nasi Ayam", "Nasi Lemak", "Nasi Kandar", "Nasi Campur", "Ayam Gepuk", "Ayam Penyet", "Briyani", "Banana Leaf Rice"]}, {"name": "Malaysian Noodles", "emoji": "🍜", "budget": "RM9–20", "foods": ["Pan Mee", "Curry Mee", "Sarawak Laksa", "Asam Laksa", "Mee Goreng", "Hokkien Mee", "Wantan Mee", "Char Kuey Teow"]}, {"name": "Hawker Favourites", "emoji": "🥟", "budget": "RM8–22", "foods": ["Dim Sum", "Yong Tau Foo", "Lok Lok", "Satay", "Chee Cheong Fun", "Roti Canai", "Murtabak", "Rojak"]}, {"name": "Burgers & Sandwiches", "emoji": "🍔", "budget": "RM12–30", "foods": ["Burger", "Chicken Burger", "Beef Burger", "Sandwich", "Club Sandwich", "Chicken Wrap", "Hot Dog"]}, {"name": "Western", "emoji": "🍕", "budget": "RM18–45", "foods": ["Pizza", "Pasta", "Steak", "Fish & Chips", "Mac & Cheese", "Chicken Chop", "Mixed Grill"]}, {"name": "Japanese", "emoji": "🍣", "budget": "RM18–50", "foods": ["Sushi", "Ramen", "Bento", "Donburi", "Japanese Curry Rice", "Udon", "Gyoza"]}, {"name": "Korean", "emoji": "🇰🇷", "budget": "RM18–45", "foods": ["Korean Fried Chicken", "Bibimbap", "Bulgogi", "Kimchi Stew", "Tteokbokki", "Kimbap"]}, {"name": "Healthy Choices", "emoji": "🥗", "budget": "RM15–35", "foods": ["Caesar Salad", "Chicken Salad", "Grain Bowl", "Poke Bowl", "Chicken Wrap", "Soup & Bread"]}, {"name": "Fast Food", "emoji": "⚡", "budget": "RM12–30", "foods": ["Fried Chicken", "Burger Set", "Nuggets", "Wrap", "Fries Combo", "Spicy Chicken Burger"]}, {"name": "Chaos", "emoji": "🎲", "budget": "Fate decides", "foods": ["Your colleague decides", "First food you see on Grab", "Under RM15 Challenge", "Walk somewhere new", "Make it extra spicy", "Healthy only"]}, {"name": "Lucky", "emoji": "🌟", "budget": "Worth it", "foods": ["Golden Fork: Eat Anything", "Dessert Before Lunch", "Upgrade to Combo", "Double Spin", "Buy Someone a Drink"]}, {"name": "Legendary", "emoji": "☠️", "budget": "RM0–??", "foods": ["Fast Today", "Leftovers Only", "No Phone During Lunch"]}];
+var challenges = ["Bring a colleague", "Try a new drink", "Rate lunch out of 10", "Take a food photo", "Sit with someone new", "No complaining for 30 minutes"];
+var fortunes = ["May your queue be short and your portion generous.", "Good food, good mood.", "The lunch machine has spoken.", "Today’s meal has main character energy."];
+var historyList = [];
+var total = 0;
+var categoryCounts = {};
+var dishCounts = {};
+var lastResult = null;
 
-const get = id => document.getElementById(id);
-const els = {
-  spin: get("spinBtn"),
-  copy: get("copyBtn"),
-  catE: get("catEmoji"),
-  dishE: get("dishEmoji"),
-  chalE: get("chalEmoji"),
-  catT: get("catText"),
-  dishT: get("dishText"),
-  chalT: get("chalText"),
-  food: get("food"),
-  catChip: get("categoryChip"),
-  budget: get("budgetChip"),
-  challenge: get("challengeChip"),
-  fortune: get("fortune"),
-  total: get("totalSpins"),
-  topCat: get("topCategory"),
-  topDish: get("topDish"),
-  hist: get("historyList")
-};
-
-let current = null;
-let history = [];
-let stats = { total: 0, categories: {}, foods: {} };
-
-try {
-  history = JSON.parse(localStorage.getItem("ljHistory") || "[]");
-  stats = JSON.parse(localStorage.getItem("ljStats") || '{"total":0,"categories":{},"foods":{}}');
-} catch (err) {
-  history = [];
-  stats = { total: 0, categories: {}, foods: {} };
+function el(id) { return document.getElementById(id); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function regularFoods() {
+  var all = [];
+  for (var i = 0; i < categories.length; i++) {
+    var n = categories[i].name;
+    if (n !== "Chaos" && n !== "Lucky" && n !== "Legendary") {
+      all = all.concat(categories[i].foods);
+    }
+  }
+  return all;
 }
-
-function random(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function normalFoods() {
-  return DATA.categories
-    .filter(c => !["Chaos", "Lucky", "Legendary", "Chef's Surprise"].includes(c.name))
-    .flatMap(c => c.foods);
-}
-
 function topName(obj) {
-  const entries = Object.entries(obj || {});
-  if (!entries.length) return "-";
-  entries.sort((a,b) => b[1] - a[1]);
-  return entries[0][0];
+  var best = "-";
+  var bestVal = 0;
+  for (var key in obj) {
+    if (obj[key] > bestVal) { best = key; bestVal = obj[key]; }
+  }
+  return best;
 }
-
-function save() {
-  try {
-    localStorage.setItem("ljHistory", JSON.stringify(history.slice(0, 10)));
-    localStorage.setItem("ljStats", JSON.stringify(stats));
-  } catch (err) {}
-}
-
-function updatePanels() {
-  els.total.textContent = stats.total || 0;
-  els.topCat.textContent = topName(stats.categories);
-  els.topDish.textContent = topName(stats.foods);
-  if (history.length) {
-    els.hist.innerHTML = history.map(item => "<li>" + item.food + " <small>(" + item.category + ")</small></li>").join("");
+function updateStats() {
+  el("totalSpins").textContent = total;
+  el("topCategory").textContent = topName(categoryCounts);
+  el("topDish").textContent = topName(dishCounts);
+  if (historyList.length === 0) {
+    el("historyList").innerHTML = "<li>No spins yet.</li>";
   } else {
-    els.hist.innerHTML = "<li>No spins yet.</li>";
+    var html = "";
+    for (var i = 0; i < historyList.length; i++) {
+      html += "<li>" + historyList[i].dish + " <small>(" + historyList[i].category + ")</small></li>";
+    }
+    el("historyList").innerHTML = html;
   }
 }
-
-function chooseResult() {
-  const category = random(DATA.categories);
-  const dish = category.name === "Chef's Surprise" ? random(normalFoods()) : random(category.foods);
-  return {
-    category,
-    dish,
-    challenge: random(DATA.challenges),
-    fortune: random(DATA.fortunes)
-  };
-}
-
-function shuffleText() {
-  const category = random(DATA.categories);
-  els.catE.textContent = category.emoji;
-  els.catT.textContent = category.name;
-  els.dishE.textContent = random(["🍛","🍜","🥟","🍔","🍕","🍣","🥗","🍱","⚡","🌮"]);
-  els.dishT.textContent = random(normalFoods());
-  els.chalE.textContent = random(["🎯","👥","🌶️","💰","📸","⭐","🎲"]);
-  els.chalT.textContent = random(DATA.challenges);
-}
-
-function createConfetti(count) {
-  const colors = ["#FFD166","#EF476F","#06D6A0","#118AB2","#C77DFF","#FF5A1F"];
-  for (let i = 0; i < count; i++) {
-    const piece = document.createElement("div");
-    piece.className = "confetti";
-    piece.style.left = Math.random() * 100 + "vw";
-    piece.style.background = random(colors);
-    piece.style.animationDelay = Math.random() * 0.35 + "s";
-    piece.style.transform = "rotate(" + Math.random() * 360 + "deg)";
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 2300);
+function confetti() {
+  var colors = ["#FFD166","#EF476F","#06D6A0","#118AB2","#C77DFF","#FF5A1F"];
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement("div");
+    p.className = "confetti";
+    p.style.left = (Math.random() * 100) + "vw";
+    p.style.background = pick(colors);
+    p.style.animationDelay = (Math.random() * .35) + "s";
+    document.body.appendChild(p);
+    setTimeout(function(piece) { piece.remove(); }, 2300, p);
   }
 }
-
-function record(result) {
-  stats.total = (stats.total || 0) + 1;
-  stats.categories[result.category.name] = (stats.categories[result.category.name] || 0) + 1;
-  stats.foods[result.dish] = (stats.foods[result.dish] || 0) + 1;
-  history.unshift({ food: result.dish, category: result.category.name, time: new Date().toISOString() });
-  history = history.slice(0, 10);
-  save();
-  updatePanels();
+function shuffleOnce() {
+  var c = pick(categories);
+  el("catEmoji").textContent = c.emoji;
+  el("catText").textContent = c.name;
+  el("dishEmoji").textContent = pick(["🍛","🍜","🥟","🍔","🍕","🍣","🥗","🍱","⚡","🌮"]);
+  el("dishText").textContent = pick(regularFoods());
+  el("chalEmoji").textContent = pick(["🎯","👥","🌶️","💰","📸","⭐","🎲"]);
+  el("chalText").textContent = pick(challenges);
 }
-
-function reveal(result) {
-  current = result;
-  els.catE.textContent = result.category.emoji;
-  els.catT.textContent = result.category.name;
-  els.dishE.textContent = result.category.emoji;
-  els.dishT.textContent = result.dish;
-  els.chalE.textContent = "🎯";
-  els.chalT.textContent = result.challenge;
-
-  els.food.textContent = result.dish;
-  els.catChip.textContent = result.category.emoji + " " + result.category.name;
-  els.budget.textContent = "💰 " + result.category.budget;
-  els.challenge.textContent = "🎯 " + result.challenge;
-  els.fortune.textContent = result.fortune;
-
-  record(result);
-
-  if (["Lucky", "Legendary", "Chef's Surprise"].includes(result.category.name)) {
-    createConfetti(90);
-  }
-}
-
 function spin() {
-  const result = chooseResult();
-  let ticks = 0;
-  els.spin.disabled = true;
-  els.food.textContent = "Spinning...";
-  els.fortune.textContent = "The lunch machine is shuffling destiny.";
-  document.querySelectorAll(".reel").forEach(reel => reel.classList.add("spinning"));
+  var button = el("spinBtn");
+  button.disabled = true;
+  el("food").textContent = "Spinning...";
+  el("fortune").textContent = "The lunch machine is shuffling destiny.";
+  el("reel1").classList.add("spinning");
+  el("reel2").classList.add("spinning");
+  el("reel3").classList.add("spinning");
 
-  const timer = setInterval(() => {
-    shuffleText();
+  var chosenCategory = pick(categories);
+  var chosenDish = pick(chosenCategory.foods);
+  var chosenChallenge = pick(challenges);
+  var chosenFortune = pick(fortunes);
+  var ticks = 0;
+
+  var timer = setInterval(function() {
+    shuffleOnce();
     ticks++;
     if (ticks >= 18) {
       clearInterval(timer);
-      document.querySelectorAll(".reel").forEach(reel => reel.classList.remove("spinning"));
-      reveal(result);
-      els.spin.disabled = false;
+      el("reel1").classList.remove("spinning");
+      el("reel2").classList.remove("spinning");
+      el("reel3").classList.remove("spinning");
+
+      el("catEmoji").textContent = chosenCategory.emoji;
+      el("catText").textContent = chosenCategory.name;
+      el("dishEmoji").textContent = chosenCategory.emoji;
+      el("dishText").textContent = chosenDish;
+      el("chalEmoji").textContent = "🎯";
+      el("chalText").textContent = chosenChallenge;
+
+      el("food").textContent = chosenDish;
+      el("categoryChip").textContent = chosenCategory.emoji + " " + chosenCategory.name;
+      el("budgetChip").textContent = "💰 " + chosenCategory.budget;
+      el("challengeChip").textContent = "🎯 " + chosenChallenge;
+      el("fortune").textContent = chosenFortune;
+
+      lastResult = chosenDish + " (" + chosenCategory.name + ")";
+      total++;
+      categoryCounts[chosenCategory.name] = (categoryCounts[chosenCategory.name] || 0) + 1;
+      dishCounts[chosenDish] = (dishCounts[chosenDish] || 0) + 1;
+      historyList.unshift({ dish: chosenDish, category: chosenCategory.name });
+      if (historyList.length > 10) historyList.pop();
+      updateStats();
+
+      if (chosenCategory.name === "Lucky" || chosenCategory.name === "Legendary") confetti();
+      button.disabled = false;
     }
   }, 90);
 }
-
 function copyResult() {
-  const text = current
-    ? "🎰 Lunch Jackpot: " + current.dish + " (" + current.category.name + ") • " + current.category.budget + " • " + current.challenge
-    : "🎰 Lunch Jackpot: Not spun yet";
+  var text = lastResult ? "🎰 Lunch Jackpot: " + lastResult : "🎰 Lunch Jackpot: Not spun yet";
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(text).then(() => {
-      els.copy.textContent = "✅";
-      setTimeout(() => els.copy.textContent = "📋", 1000);
-    }).catch(() => alert(text));
+    navigator.clipboard.writeText(text).then(function() {
+      el("copyBtn").textContent = "✅";
+      setTimeout(function() { el("copyBtn").textContent = "📋"; }, 1000);
+    });
   } else {
     alert(text);
   }
 }
-
-function setupTabs() {
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-      tab.classList.add("active");
-      get(tab.dataset.tab + "Panel").classList.add("active");
-    });
-  });
+function showStats() {
+  el("statsTab").classList.add("active");
+  el("historyTab").classList.remove("active");
+  el("statsPanel").classList.add("active");
+  el("historyPanel").classList.remove("active");
 }
-
-els.spin.addEventListener("click", spin);
-els.copy.addEventListener("click", copyResult);
-setupTabs();
-updatePanels();
+function showHistory() {
+  el("historyTab").classList.add("active");
+  el("statsTab").classList.remove("active");
+  el("historyPanel").classList.add("active");
+  el("statsPanel").classList.remove("active");
+}
+window.onload = function() {
+  el("spinBtn").onclick = spin;
+  el("copyBtn").onclick = copyResult;
+  el("statsTab").onclick = showStats;
+  el("historyTab").onclick = showHistory;
+  updateStats();
+};
 </script>
 </body>
 </html>
